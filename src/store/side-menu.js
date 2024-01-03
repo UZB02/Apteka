@@ -4,29 +4,29 @@ const state = () => {
       {
         icon: 'HomeIcon',
         pageName: 'side-menu-dashboard',
-        title: 'Dashboard',
+        title: 'dashboard',
         subMenu: [
           {
             icon: '',
             pageName: 'side-menu-dashboard-overview-1',
-            title: 'Overview 1'
+            title: 'overview_1'
           },
           {
             icon: '',
             pageName: 'side-menu-dashboard-overview-2',
-            title: 'Overview 2'
+            title: 'overview_2'
           },
           {
             icon: '',
             pageName: 'side-menu-dashboard-overview-3',
-            title: 'Overview 3'
+            title: 'overview_3'
           }
         ]
       },
       {
         icon: 'HardDriveIcon',
         pageName: 'products',
-        title: 'Dorilar jadvali'
+        title: 'products'
       },
       // {
       //   icon: 'BoxIcon',
@@ -81,13 +81,13 @@ const state = () => {
       {
         icon: 'HardDriveIcon',
         pageName: 'category',
-        title: 'Categoriya'
+        title: 'category'
       },
-      {
-        icon: 'CalendarIcon',
-        pageName: 'side-menu-calendar',
-        title: 'Calendar'
-      },
+      // {
+      //   icon: 'CalendarIcon',
+      //   pageName: 'side-menu-calendar',
+      //   title: 'Calendar'
+      // },
       'devider',
       // {
       //   icon: 'EditIcon',

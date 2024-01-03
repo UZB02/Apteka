@@ -8,11 +8,21 @@
       <a href="" class="breadcrumb--active">{{ $t('dashboard') }}</a>
     </div>
     <!-- END: Breadcrumb -->
-    <div class="lang flex gap-2 mx-6">
+      <div class="p-5">
+      <div @click="toggleLangItem" v-if="modal">
+        <img :src="selectedFlag.img" alt="Flag" width="40" height="30" style="border-radius: 5px; cursor: pointer;" />
+      </div>
+      <ul v-if="showLangItem" class=" flex items-center justify-center gap-3 flex-col mt-20">
+        <li v-for="flag in data.flag" :key="flag.name" @click="changeLang(flag.name)">
+          <img :src="flag.img" alt="Flag" width="40" height="30" style="border-radius: 5px; cursor: pointer;" />
+        </li>
+      </ul>
+    </div>
+    <!-- <div class="lang flex gap-2 mx-6">
       <button class="btn" @click="uzLang">Uz</button>
       <button class="btn" @click="enLang">En</button>
       <button class="btn" @click="ruLang">Ru</button>
-    </div>
+    </div> -->
     <!-- BEGIN: Search -->
     <div class="intro-x relative mr-3 sm:mr-6">
       <div class="search hidden sm:block">
@@ -175,28 +185,69 @@ export default defineComponent({
       searchDropdown.value = false
     }
 
-    const uzLang = () => { 
-      localStorage.setItem("lang", "uz")
-      location.reload();
-    }
-    const enLang = () => { 
-      localStorage.setItem("lang", "en")
-      location.reload();
-    }
-    const ruLang = () => { 
-      localStorage.setItem("lang", "ru")
-      location.reload();
-    }
+    // const uzLang = () => { 
+    //   localStorage.setItem("lang", "UZ")
+    //   location.reload();
+    // }
+    // const enLang = () => { 
+    //   localStorage.setItem("lang", "EN")
+    //   location.reload();
+    // }
+    // const ruLang = () => { 
+    //   localStorage.setItem("lang", "RU")
+    //   location.reload();
+    // }
 
     return {
       searchDropdown,
       showSearchDropdown,
       hideSearchDropdown,
       loginpushpage,
-      uzLang,
-      enLang,
-      ruLang
+      // uzLang,
+      // enLang,
+      // ruLang
     }
-  }
+  },
+  data() {
+    return {
+      data: {
+        active: localStorage.getItem("lang") || "UZ",
+        flag: [
+          {
+            name: "RU",
+            img: "https://wikiflag.ru/wp-content/uploads/2022/03/1.jpg",
+          },
+          {
+            name: "EN",
+            img: "https://media.baamboozle.com/uploads/images/41367/1593085639_60643",
+          },
+          {
+            name: "UZ",
+            img: "https://i.pinimg.com/originals/31/59/7f/31597f5024d357ed5cbac66f4bd61d3b.png",
+          },
+        ],
+      },
+      showLangItem: false,
+      modal: true,
+      selectedFlag: {},
+    };
+  },
+  mounted() {
+    this.selectedFlag = this.data.flag.find((flag) => flag.name === this.data.active);
+  },
+  methods: {
+    toggleLangItem() {
+      this.modal = false;
+      this.showLangItem = !this.showLangItem;
+    },
+    changeLang(name) {
+      this.data.active = name;
+      localStorage.setItem("lang", name);
+      this.selectedFlag = this.data.flag.find((flag) => flag.name === name);
+      this.showLangItem = false;
+      this.modal = true;
+      location.reload();
+    },
+  },
 })
 </script>

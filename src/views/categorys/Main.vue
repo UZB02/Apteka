@@ -3,29 +3,18 @@
   <div class="text-center"></div>
   <!-- END: Modal Toggle -->
   <!-- BEGIN: ADD Modal Content -->
-  <div id="basic-modal-preview" class="modal" tabindex="-1" aria-hidden="true">
+  <div v-if="modal" id="basic-modal-preview" class="modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form
-          @submit="addNewCategory($event)"
-          class="bg-white shadow-md rounded flex gap-1 px-8 pt-6 pb-8 mb-4"
-          typeof="submut"
-        >
-          <input
-            v-model="InputValue"
-            placeholder="New Category"
+        <form @submit="addNewCategory($event)" class="bg-white shadow-md rounded flex gap-1 px-8 pt-6 pb-8 mb-4"
+          typeof="submut">
+          <input v-model="InputValue" placeholder="New Category"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-          />
-          <button class="btn btn-primary shadow-md mr-2" data-dismiss="modal">
+            type="text" id="addInput" />
+          <button class="btn btn-primary shadow-md mr-2">
             {{ $t("add") }}
           </button>
-          <button
-            type="button"
-            data-dismiss="modal"
-            id="close-modal"
-            class="btn  btn-outline-secondary w-56 mr-1"
-          >
+          <button type="button" data-dismiss="modal" id="close-modal" class="btn  btn-outline-secondary w-56 mr-1">
             {{ $t("cancel") }}
           </button>
         </form>
@@ -36,34 +25,16 @@
   <!-- END: Modal Content -->
   <!-- BEGIN: Edit Modal Content -->
   <div>
-    <div
-      id="static-backdrop-modal-preview"
-      class="modal"
-      data-backdrop="static"
-      tabindex="-1"
-    >
+    <div id="static-backdrop-modal-preview" class="modal" data-backdrop="static" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-body">
           <div class="bg-white  rounded flex gap-1 px-8 pt-6 pb-8 mb-4">
-            <input
-              type="text"
-              v-model="editInputvalue"
-              class="shadow-md  appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-            <button
-              type="button"
-              data-dismiss="modal"
-              @click="editCategory(editInputvalue)"
-              class="btn btn-primary w-28"
-            >
+            <input type="text" v-model="editInputvalue"
+              class="shadow-md  appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+            <button type="button" data-dismiss="modal" @click="editCategory(editInputvalue)" class="btn btn-primary w-28">
               {{ $t("edit") }}
             </button>
-            <button
-              type="button"
-              data-dismiss="modal"
-              id="close-modal"
-              class="btn  btn-outline-secondary w-56 mr-1"
-            >
+            <button type="button" data-dismiss="modal" id="close-modal" class="btn  btn-outline-secondary w-56 mr-1">
               {{ $t("cancel") }}
             </button>
           </div>
@@ -75,45 +46,29 @@
   <div>
     <h2 class="intro-y text-lg font-medium mt-10">{{ $t("data_list_layout") }}</h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
-      <div
-        class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"
-      >
-        <a
-          href="javascript:;"
-          data-toggle="modal"
-          data-target="#basic-modal-preview"
-          class="btn btn-primary shadow-md mr-2"
-          >{{ $t("add_new_category") }}</a
-        >
+      <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+        <a href="javascript:;" data-toggle="modal" @click="modalAdd" data-target="#basic-modal-preview"
+          class="btn btn-primary shadow-md mr-2">{{ $t("add_new_category") }}</a>
 
         <!-- <button  @click="addNewCategory">Add New Category</button> -->
         <div class="dropdown">
-          <button
-            class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300"
-            aria-expanded="false"
-          >
+          <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
             <span class="w-5 h-5 flex items-center justify-center">
               <PlusIcon class="w-4 h-4" />
             </span>
           </button>
           <div class="dropdown-menu w-40">
             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-              <a
-                href=""
-                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-              >
+              <a href=""
+                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                 <PrinterIcon class="w-4 h-4 mr-2" /> {{ $t("print") }}
               </a>
-              <a
-                href=""
-                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-              >
+              <a href=""
+                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                 <FileTextIcon class="w-4 h-4 mr-2" /> {{ $t("export_to_excel") }}
               </a>
-              <a
-                href=""
-                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-              >
+              <a href=""
+                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                 <FileTextIcon class="w-4 h-4 mr-2" /> {{ $t("export_to_PDF") }}
               </a>
             </div>
@@ -124,16 +79,9 @@
         </div>
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
           <div class="w-56 relative text-gray-700 dark:text-gray-300">
-            <input
-              type="text"
-              v-model="searchKeyword"
-              @input="searchData"
-              class="form-control w-56 box pr-10 placeholder-theme-13"
-              placeholder="Search..."
-            />
-            <SearchIcon
-              class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"
-            />
+            <input type="text" v-model="searchKeyword" @input="searchData"
+              class="form-control w-56 box pr-10 placeholder-theme-13" placeholder="Search..." />
+            <SearchIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" />
           </div>
         </div>
       </div>
@@ -142,60 +90,37 @@
         <table class="table table-report -mt-2">
           <thead>
             <tr>
-              <th
-                class="whitespace-nowrap"
-                style="display: flex;align-items: center; justify-content: center;transform: translate(-10px)"
-              >
-               {{ $t("id") }}
+              <th class="whitespace-nowrap"
+                style="display: flex;align-items: center; justify-content: center;transform: translate(-10px)">
+                {{ $t("id") }}
               </th>
-              <th class="whitespace-nowrap">{{$t("name")}}</th>
+              <th class="whitespace-nowrap">{{ $t("name") }}</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="(faker, fakerKey) in data.value"
-              :key="fakerKey"
-              class="intro-x"
-            >
+            <tr v-for="(faker, fakerKey) in data.value" :key="fakerKey" class="intro-x">
               <td class="w-20">
                 <div class="flex  justify-center">
-                  <div
-                    class="w-10 h-10 image-fi -ml-5"
-                    style="display: flex; align-items: center;justify-content: center;"
-                  >
+                  <div class="w-10 h-10 image-fi -ml-5"
+                    style="display: flex; align-items: center;justify-content: center;">
                     {{ fakerKey + 1 }}
                   </div>
                 </div>
               </td>
               <td>
-                <a
-                  href=""
-                  class="font-medium whitespace-nowrap"
-                  style="text-align: center;"
-                  >{{ faker?.name }}</a
-                >
+                <a href="" class="font-medium whitespace-nowrap" style="text-align: center;">{{ faker?.name }}</a>
               </td>
               <td class="table-report__action w-56">
                 <div class="flex justify-center items-center">
                   <!-- <a href="javascript:;" data-toggle="modal"  class="btn btn-primary">Show Modal</a> -->
 
-                  <a
-                    href="javascript:;"
-                    @click="modalEdit(faker)"
-                    class="flex items-center mr-3"
-                    data-toggle="modal"
-                    data-target="#static-backdrop-modal-preview"
-                  >
+                  <a href="javascript:;" @click="modalEdit(faker)" class="flex items-center mr-3" data-toggle="modal"
+                    data-target="#static-backdrop-modal-preview">
                     <Edit2Icon class="w-4 h-4 mr-1 fill-500 " />
-                    {{$t("edit")}}
+                    {{ $t("edit") }}
                   </a>
-                  <a
-                    @click="modalDelete(faker.id)"
-                    class="flex items-center text-theme-6"
-                    href="javascript:;"
-                    data-toggle="modal"
-                    data-target="#delete-confirmation-modal"
-                  >
+                  <a @click="modalDelete(faker.id)" class="flex items-center text-theme-6" href="javascript:;"
+                    data-toggle="modal" data-target="#delete-confirmation-modal">
                     <Trash2Icon class="w-4 h-4 mr-1" /> {{ $t("delete") }}
                   </a>
                 </div>
@@ -208,12 +133,7 @@
     </div>
     <!-- BEGIN: Delete Confirmation Modal -->
     <div v-if="modal">
-      <div
-        id="delete-confirmation-modal"
-        class="modal"
-        tabindex="-1"
-        aria-hidden="true"
-      >
+      <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-body p-0">
@@ -226,19 +146,10 @@
                 </div>
               </div>
               <div class="px-5 pb-8 text-center">
-                <button
-                  type="button"
-                  id="cancelModal"
-                  data-dismiss="modal"
-                  class="btn btn-outline-secondary w-24 mr-1"
-                >
+                <button type="button" id="cancelModal" data-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">
                   Cancel
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-danger w-24"
-                  @click="deletCategory"
-                >
+                <button type="button" class="btn btn-danger w-24" @click="deletCategory">
                   Delete
                 </button>
               </div>
@@ -276,8 +187,13 @@ function modalEdit(faker) {
   editInputvalue.value = faker.name
   eId.value = faker.id
 }
+const modalAdd = (() => {
+  modal.value = true
+})
 
 fetchData()
+
+console.log(modal);
 
 function fetchData() {
   axios
@@ -292,28 +208,38 @@ function fetchData() {
 }
 const addNewCategory = event => {
   event.preventDefault()
-  axios
-    .post(
-      'http://pharm-api.kdevs.uz/api/categories',
-      { name: InputValue.value },
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token')
+  if (InputValue.value == "") {
+    document.querySelector('#addInput').style.border = '2px inset red';
+    // document.querySelector('#addInput').placeholder = `MAYDONNI TO'LDIRING!`;
+  } else {
+    axios
+      .post(
+        'http://pharm-api.kdevs.uz/api/categories',
+        { name: InputValue.value },
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
         }
-      }
-    )
+      )
       .then(res => {
-         Swal.fire({
-          position: 'top-center',
-          icon: 'success',
-          title: 'Add successfully',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      document.querySelector('#close-modal').click()
-      fetchData()
-    })
-  InputValue.value = ''
+        if (res.status == 200) {
+          document.querySelector('#addInput').style.border = '';
+          // document.querySelector('#addInput').placeholder = '';
+          Swal.fire({
+            position: 'top-center',
+            icon: 'success',
+            title: 'Add successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          // document.querySelector('#close-modal').click()
+          modal.value = false;
+          fetchData()
+        }
+      })
+    InputValue.value = ''
+  }
 }
 const deletCategory = () => {
   axios
@@ -324,8 +250,8 @@ const deletCategory = () => {
     })
     .then(result => {
       // selectedId.value = result.id
-        if (result.status === 200) {
-         Swal.fire({
+      if (result.status === 200) {
+        Swal.fire({
           position: 'top-center',
           icon: 'success',
           title: 'Delet successfully',
@@ -378,15 +304,15 @@ const editCategory = e => {
         }
       }
     )
-      .then(res => {
-           Swal.fire({
-          position: 'top-center',
-          icon: 'success',
-          title: 'Editted successfully',
-          showConfirmButton: false,
-          timer: 1500
-           })
-        console.log(e);
+    .then(res => {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Editted successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      console.log(e);
       fetchData()
       // document.querySelector('#close-modal').click()
     })

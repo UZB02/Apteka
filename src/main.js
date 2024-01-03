@@ -17,9 +17,9 @@ import './assets/sass/app.scss'
 const i18n = createI18n({
   locale: localStorage.getItem('lang'),
   messages: {
-    en: en,
-    uz: uz,
-    ru:ru
+    EN: en,
+    UZ: uz,
+    RU:ru
   }
 })
 const app = createApp(App)
