@@ -29,3 +29,4 @@ yarn lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 # Apteka
 # Apteka
+# pharm-front
